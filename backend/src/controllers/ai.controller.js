@@ -13,11 +13,31 @@ export const getSuggestion = async (req, res) => {
                 message : 'Prompt is required for suggestions.'
             })
         }
-        const result = await model.generateContent(req.body.prompt);
+
+        //to be enabled later for ai to work
+        // const result = await model.generateContent(req.body.prompt);
+
+        //use hardcoded data for now 
+        let result = {}
+
+        if (req.body.prompt?.toLowerCase().includes('angular')) {
+            result =
+            'Focus on Angular Signals, Components, and Services today. Complete one feature before moving to another.';
+        } else if (req.body.prompt?.toLowerCase().includes('backend')) {
+            result =
+            'Work on Express routes, controllers, and MongoDB integration. Keep APIs small and test them frequently.';
+        } else if (req.body.prompt?.toLowerCase().includes('motivate')) {
+            result =
+            'You are making steady progress. Consistency beats intensity. Keep building your project one step at a time.';
+        } else {
+            result =
+            'Continue working on your Learning Tracker App. Complete the current roadmap day before adding new features.';
+        }
 
         res.status(200).json({
             message: 'AI suuggestions',
-            suggestion: result.response.text()
+            // suggestion: result.response.text()
+            suggestion : result
         })
 
     } catch (e) {
