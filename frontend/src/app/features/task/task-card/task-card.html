@@ -1,0 +1,77 @@
+@if(loading()){
+    <app-loader></app-loader>
+}
+@else {
+<div class=" flex flex-col border-2 border-gray-300 shadow-lg p-4 m-3 rounded-2xl flex-1 
+        h-[500px] space-y-4 flex-grow max-w-7xl pr-2 mx-auto bg-black/20">
+        
+        @if(tasks().length === 0){
+            <div class="h-full flex items-center justify-center">
+                <p class="text-2xl font-semibold text-gray-700 text-center">
+                    No tasks yet 🚀 <br>
+                    Create your first task
+                </p>
+            </div>
+        }
+        @else {
+            @if(msg()){
+            <div class="px-2 shadow">
+                <div class="font-bold flex justify-content mb-2">{{msg()}}</div>
+            </div>
+            }
+        <div class="flex-1 overflow-y-auto p-4 space-y-4 flex-grow">
+            @for (task of tasks(); track task._id) {
+            <div class="flex flex-row justify-content gap-2 my-2">
+                <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleCompletion(task)">
+                @if(editingTaskId() === task._id){
+                <div class="flex flex-col">
+                <div>
+                    <input type="text" [(ngModel)]="task.title" 
+                    [ngClass]="{'border-red-500': !task.title.trim()}" class="border-2 " required />
+                    <!-- <button (click)="updateTask(task)" class="font-bold text-green-500 disabled:text-gray-500"
+                        [disabled]="!task.title.trim()">
+                        <mat-icon>check</mat-icon>
+                    </button> -->
+                    <button [disabled]="!task.title.trim()" (click)="updateTask(task)" class="bg-green-500 hover:bg-green-600 text-white rounded-full 
+                                            w-6 h-6 disabled:opacity-40 transition m-2 text-center">
+                        <mat-icon>check</mat-icon>
+                    </button>                   
+                    <button (click)="cancelUpdate()" class="text-red-400 font-bold">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    @if (!task.title.trim()) {
+                    <p class="text-red-500 text-md">
+                        Title cannot be empty
+                    </p>
+                    }
+                </div>
+                </div>
+                } @else {
+                <p class="font-bold" [ngClass]="{ 'line-through': task.completed }">{{ task.title }}</p>
+                <p class="font-bold text-yellow-200 min-w-[60px]" [ngClass]="{ 'text-blue-400': !task.completed }">
+                    {{task.completed? '' : 'To Do'}}</p>
+                <button (click)="editTask(task)" class="text-blue-500 hover:scale-110 transition">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                }
+                <div class="flex gap-3">
+                    <button (click)="deleteTask(task)" class="text-red-500 hover:scale-110 transition">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    }
+        <button (click)="onShowTaskForm()" class="border-gray-300 bg-blue-400 text-white font-bold rounded-xl py-2 px-4"
+            [ngClass]="{'bg-red-500' : showTaskForm()}">
+            {{showTaskForm()? 'Cancel' : 'Add a new Task'}}
+        </button>
+
+        @if(showTaskForm()){
+            <app-add-task-form (taskCreated)="addTask()"></app-add-task-form>
+        }
+    </div>
+}

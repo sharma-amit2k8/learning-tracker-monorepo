@@ -1,0 +1,36 @@
+<div class="px-4 whitespace-pre-line">
+  <h3 class="text-lg font-semibold mb-3">
+    🧠 AI Suggestion
+  </h3>
+  @if(chat().length === 0){
+    <p>
+      Ask for study suggestions, roadmap guidance,
+      productivity tips, or learning advice.
+    </p>
+  } @else {
+  <div #chatContainer class="h-[270px] overflow-y-auto space-y-4 p-4">
+    @for(message of chat(); track $index) {
+      <!-- @if(message.role === 'ai') {
+        <div class="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white">
+          🤖
+        </div>
+      } -->
+      <div class="p-4 rounded-2xl max-w-[80%]" [class.ml-auto]="message.role === 'user'"
+        [class.bg-blue-500]="message.role === 'user'" [class.text-white]="message.role === 'user'"
+        [class.bg-gray-200]="message.role === 'ai'" [class.text-black]="message.role === 'ai'">
+        {{ message.message }}
+      </div>
+      <div class="text-xs text-gray-500 mt-1 max-w-[10%]" [class.ml-auto]="message.role === 'user'">
+        {{ message.createdAt | date:'shortTime' }}
+      </div>
+    }
+  </div>
+  <!-- <p class="leading-7 text-gray-800">
+      <div class="p-4 rounded-2xl max-w-[80%]">
+        @for(message of chat() ; track $index){
+          {{message.role}} : {{message.message}}
+        }
+      </div>
+    </p> -->
+  }
+</div>

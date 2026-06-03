@@ -1,0 +1,15 @@
+<div class="bg-blue-800 text-white px-6 py-4 flex gap-6">
+    <a routerLink="/home" routerLinkActive="text-blue-600 font-bold" class="font-bold hover:text-blue-400">Home</a>
+    <a routerLink="/login" routerLinkActive="text-blue-600 font-bold" class="font-bold hover:text-blue-400">Login</a>
+    @if(!auth.checkToken()){
+        <a routerLink="/register" routerLinkActive="text-blue-600 font-bold" class="font-bold hover:text-blue-400">
+            Signup</a>
+    }
+    @if(auth.checkToken()){
+        <a routerLink="/ai" routerLinkActive="text-blue-600 font-bold"
+        class="font-bold hover:text-blue-400">Ai Assistant 🤖</a>
+        <p class="font-bold hover:text-blue-500 text-green-500 px-6">Hello {{username}}!!!</p>
+        <a (click)="logout()" class="font-bold hover:text-blue-400 ml-auto">Log out </a>
+    }
+    
+</div>

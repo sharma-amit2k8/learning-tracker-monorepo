@@ -1,0 +1,40 @@
+<div class="flex flex-col border-2 border-gray-300 rounded-2xl h-auto p-2 m-1">
+    <div class="flex gap-6 justify-between mb-1">
+        <div class="font-bold flex">{{course().title}}</div>
+        <div class="flex gap-3">
+            <button (click)="editCourse(course())" class="text-blue-500 hover:scale-110 transition">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteCourse(course())" class="text-red-500 hover:scale-110 transition">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+    @if(course().description){
+    <div class="py-1">{{course().description}}</div>
+    }
+    <div class="flex justify-center">
+        <div class="px-3 py-1 rounded-full text-center w-50 items-center flex justify-center" [ngClass]="{
+            'bg-yellow-500/20 text-yellow-400' : course().status === 'not started',
+            'bg-green-500/20 text-green-400' : course().status === 'in progress',
+            'bg-red-500/20 text-red-400' : course().status === 'completed',
+        }">
+            {{course().status}}
+        </div>
+    </div>
+    @if(progress() > 0) {
+    <div>
+        <div class="font-bold m-1">Progress : {{progress()}} %</div>
+        <div class="bg-gray-400 w-full rounded-full ">
+            <div class="bg-green-500 h-6 rounded-full transition-all duration-500  text-center text-white"
+                [style.width.%]="progress()">
+
+            </div>
+        </div>
+    </div>
+    }
+    <div class="text-sm text-gray-600 mt-2">
+        {{ course().completedLessons }}/{{ course().totalLessons }} lessons completed
+    </div>
+    <!-- <p class="font-italic">{{course().price}}</p> -->
+</div>

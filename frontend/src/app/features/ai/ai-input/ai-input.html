@@ -1,0 +1,16 @@
+<!-- <div class="bg-white/10 rounded-xl shadow p-4"> -->
+<div class="px-4 flex gap-2">
+  <textarea
+    rows="2"
+    [ngModel]="query()"
+    (ngModelChange)="query.set($event)"
+    (keydown.enter)="onEnter($event)"
+    placeholder="Ask AI something..."
+    class="w-full border rounded-lg p-3 outline-none"
+  ></textarea>
+  <button (click)="getSuggestion()" [disabled]="!query() || loading()"
+    class="mt-5 bg-black text-white px-6 py-2 rounded-lg disabled:bg-gray-300"
+  >
+    {{ loading() ? '🧠Thinking... ' : 'Ask AI' }}
+  </button>
+</div>

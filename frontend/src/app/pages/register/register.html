@@ -1,0 +1,88 @@
+@if(loading()){
+    <app-loader></app-loader>
+} 
+@else {
+
+<div class="min-h-[90vh] bg-cover bg-center flex flex-col items-center justify-center">
+<div>
+<h3 class="font-bold">Please provide your details to Signup</h3>
+</div>
+<div>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()"
+     class="flex flex-col justify-center px-4 py-6 border-2 border-blue-300 rounded-2xl shadow-lg" >
+     <div class="flex">
+        <label id="name" class="font-bold w-24">Name*</label>
+        <input id="name" type="text" formControlName="name" class="w-60">
+    </div>
+    <div>
+        @if(signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched){
+            <p class="text-red-500 text-center">Name is mandatory</p>
+        }
+    </div>
+    <div class="flex">
+        <label for="email" class="font-bold w-24">Email*</label>
+        <input id="email" type="email" formControlName="email" class="w-60">
+    </div>
+    <div>
+        @if(signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched){
+            <p class="text-red-500 text-center">Email is mandatory</p>
+        }
+        @if(signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched){
+            <p class="text-red-500 text-center">Email format is not correct</p>
+        }
+    </div>
+    <div class="flex">
+        <label for="password" class="font-bold w-24">Password*</label>
+        <div class="relative">
+        <input type="{{showPassword()? 'text' : 'password'}}" formControlName="password" class="w-60">
+        <button type="button" (click)="showPassword.set(!showPassword())"
+            class=" absolute right-3 top-1/2 -translate-y-1/2">
+            <mat-icon>{{showPassword()? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        </div>
+    </div>
+    <div>
+        @if(signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched){
+            <p class="text-red-500 text-center">Password is mandatory</p>
+        }
+        @if(signupForm.get('password')?.hasError('minlength') && signupForm.get('password')?.touched){
+            <p class="text-red-500 text-center">Password length should be more than 6</p>
+        }
+    </div>
+    <div class="flex">
+        <label for="confirmPassword" class="font-bold w-24">Confirm Password*</label>
+        <div class="relative">
+            <input type="{{showConfirmPassword()? 'text' : 'password'}}" formControlName="confirmPassword" class="w-60">
+            <button type="button" (click)="showConfirmPassword.set(!showConfirmPassword())"
+                class="absolute right-3 top-1/2 -translate-y-1/2">
+                <mat-icon>{{showConfirmPassword()? 'visibility_off': 'visibility'}}</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div>
+        @if(signupForm.get('confirmPassword')?.hasError('required') && signupForm.get('confirmPassword')?.touched){
+            <p class="text-red-500 text-center">Password is mandatory</p>
+        }
+        @if(signupForm.get('confirmPassword')?.hasError('minlength') && signupForm.get('confirmPassword')?.touched){
+            <p class="text-red-500 text-center">Password length should be more than 6</p>
+        }
+    </div>
+    <div>
+        @if(signupForm.get('confirmPassword')?.touched && 
+        signupForm.get('password')?.value !==  signupForm.get('confirmPassword')?.value){
+            <p class="text-red-500 text-center">Password and confirm Password do not match</p>
+        }
+    </div>
+    <button [disabled]="signupForm.invalid || 
+        signupForm.get('password')?.value !==  signupForm.get('confirmPassword')?.value" type="submit" 
+        class="border-2 border-white bg-blue-400 text-white p-2 m-2 text-center rounded-2xl disabled:bg-gray-500">
+        Sign Up
+    </button>
+    </form>
+    <div class="font-bold text-center">
+        If you are an existing user 
+        <a class="font-bold text-blue-400" routerLink="/login"> Please Login</a>
+    </div>
+</div>
+</div>
+}

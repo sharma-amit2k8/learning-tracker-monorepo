@@ -1,0 +1,39 @@
+<div class="h-full w-full">
+    @if(loading()){
+<app-loader></app-loader>
+}
+@else {
+<div class="flex flex-col border-2 border-gray-300 shadow-lg p-2 m-3 rounded-2xl flex-1 
+        h-[500px] space-y-4 pr-2 mx-auto bg-black/20 flex-grow">
+    <!-- <div class="flex-grow"> -->
+        @if(myCourses().length === 0){
+            <div class="h-full flex items-center justify-center">
+                <p class="text-2xl font-semibold text-gray-700 text-center">
+                    No courses to track, <br>
+                    Add course by clicking button below
+                </p>
+            </div>
+        }
+        @else {
+            <div class="px-2 shadow">
+                <div class="font-bold flex justify-content mb-3"> My Courses :</div>
+            </div>
+            <div class="flex-1 overflow-y-auto p-2 space-y-4 flex-grow">
+                @for(course of myCourses(); track course._id){
+                    <app-course-card [course]="course" (onDelete)="getMyCourses() "
+                    (onUpdate)="getMyCourses()"></app-course-card>
+                }
+            </div>
+        }
+        <button class="border-2 bg-blue-400 border-blue-400 font-bold text-white p-2 rounded-xl"
+    (click)="showAddCourseModal()">
+        + Add Course
+    </button>
+    </div>
+
+    @if(showAddCourse()){
+        <app-add-course-modal (modalClosed)="hideAddCourseModal($event)" ></app-add-course-modal>
+    }
+<!-- </div> -->
+}
+</div>

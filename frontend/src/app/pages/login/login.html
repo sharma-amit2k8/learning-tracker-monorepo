@@ -1,0 +1,76 @@
+<div class="min-h-[90vh] bg-cover bg-center flex items-center justify-center">
+<div class="flex flex-col items-center justify-center min-h-[80vh]">
+    <p class="flex justify-center items-center gap-1 font-bold text-orange-300" mb-2> New to the App,  
+       <a routerLink="/register" class="text-blue-500 font-bold hover:underline">Please Signup</a>
+    </p>
+    <div class=" flex ">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" 
+        class="px-4 py-6 flex flex-col justify-center shadow-lg border-2 border-blue-300  rounded-xl ">
+            <div class="flex">
+                <label for="email" class="px-4 py-2 my-2 w-24 font-bold ">Email*</label>
+                <input type="email" name="email" formControlName="email" placeholder="provide your Email"
+                    class="border-2 border-blue-500 p-1 mx-4 my-2 text-white invalid:border-red-500">
+            </div>
+            <div class="pl-24">
+                    @if(loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
+                    <p class="text-yellow-200 font-bold">Please provide Email</p>
+                    }
+                    @if(loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
+                    <p class="text-yellow-200 font-bold">Please provide a valid Email</p>
+                    }
+            </div>
+            <div class="flex">
+                <label for="password" class="px-4 py-2 my-2 w-24 font-bold">Password*</label>
+                <input type="password" name="password" formControlName="password"
+                    class="border-2 border-blue-500 p-1 mx-4 my-2">
+            </div>
+              <div class="pl-24">
+                    @if(loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
+                    <p class="text-yellow-200 font-bold">Password is mandatory</p>
+                    }
+                    @if(loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched) {
+                    <p class="text-yellow-200 font-bold">Password should be minimum 6 character</p>
+                    }
+                </div>
+            <div class="my-2">
+                @if(loading()){
+                    <div class="flex justify-center items-center">
+                       <!-- <mat-spinner  color="accent" diameter="50"></mat-spinner> -->
+                        <app-loader></app-loader>
+                    </div>
+                }
+                @if(errorMsg){
+                    <p class="text-red-400 font-bold text-center"> Login Failed {{errorMsg}}</p>
+                }
+            </div>
+            <button [disabled]="loginForm.invalid || loading()" type="submit"
+                class="border-2 rounded-xl border-black-2 bg-blue-400 text-white px-4 py-2 disabled:bg-gray-500">
+                {{loading()? 'Loading...' : 'Login'}}
+            </button>
+        </form>
+        
+    </div>
+    
+    
+</div>
+</div>
+<!-- 
+<div class="">
+    <div class="bg-white max-w-md">
+        <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)"
+            class="rounded-xl shadow-lg flex flex-col justify-content items-center justify-center gap-6">
+            <div class="flex flex-col">
+                <label for="email" class="mt-2">Email</label>
+                <input label="Email" type="email" name="email" placeholder="enter ur email" required ngModel>
+            </div>
+            <div class="flex flex-col">
+                <label for="password" class="mt-2">Password</label>
+                <input label="Password" type="password" name="password" required ngModel>
+            </div>
+            <button type="submit" [disabled]="!userForm.valid" class="bg-blue-500 text-white btn"> Login </button>
+        </form>
+        <div class="bg-white p-6 rounded-2xl shadow-lg">
+            <p>New to the App, <a href="/register" class="text-blue-400">Please Signup</a></p>
+        </div>
+    </div>
+</div> -->

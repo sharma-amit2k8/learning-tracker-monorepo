@@ -1,0 +1,21 @@
+<div class="flex border-blue-500 shadow-lg rounded-2xl p-4 m-2 gap-2">
+    <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+        <div class="flex">
+            <label for="title" class="font-bold mx-4 p-2 px-4">Title</label>
+            <input name="title" formControlName="title" class="border-2 border-blue-500 rounded-xl px-2" required>
+        </div>
+        @if(taskForm.invalid && taskForm.touched){
+        <p class="text-red-500 font-bold text-md text-center">
+            @if(taskForm.get('title')?.hasError('required')){
+            Title is required
+            }
+            @if(taskForm.get('title')?.hasError('minlength')){
+            Minimum 3 characters
+            }
+        </p>
+        }
+        <button type="submit" [disabled]="taskForm.invalid" class="border-gray-300 bg-blue-400 
+                        text-white font-bold rounded-xl py-2 px-4 my-2 disabled:bg-gray-500">
+            Save</button>
+    </form>
+</div>

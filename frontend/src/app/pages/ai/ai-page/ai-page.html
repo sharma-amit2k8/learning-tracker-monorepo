@@ -1,0 +1,33 @@
+<div class="w-full rounded-2xl bg-white/10 border border-white/20 shadow-lg">
+  <div class="max-w-4xl mx-auto p-6 space-y-6">
+<!-- 
+  <h1 class="text-3xl font-bold">
+    AI Learning Assistant
+  </h1> -->
+
+  <div class="flex flex-col gap-2">
+    <div >
+    <!-- @else { -->
+    <app-ai-response [chat]="chatMessage()" />
+    <!-- } -->
+    @if(loading()){
+      <!-- <app-loader></app-loader> -->
+        <div class="flex items-center gap-2 mt-4">
+          <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin">
+        </div>
+        <div class="flex gap-1 p-4">
+          <div class="animate-bounce">•</div>
+          <div class="animate-bounce">•</div>
+          <div class="animate-bounce">•</div>
+        </div>
+      </div>
+    } 
+    </div>
+
+    <app-ai-input (askAI)="handleQuery($event)" [loading]="loading()"/>
+    <button class="bg-black border-2 border-gray-300 flex justify-center items-center mx-auto text-white p-4 rounded-2xl
+    disabled:bg-gray-300" 
+    (click)="clearChatHistory()" [disabled]="chatMessage().length === 0"> Clear Chat</button>
+  </div>
+</div>
+</div>
