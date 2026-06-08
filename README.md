@@ -197,9 +197,9 @@ Hosted on MongoDB Atlas.
 * Mobile Application (Capacitor)
 
 ---
+```
 
 <h2>Screenshots</h2>
-## Screenshots
 
 ### Login Page
 
