@@ -199,21 +199,19 @@ Hosted on MongoDB Atlas.
 ---
 
 <h2>Screenshots</h2>
+## Screenshots
 
-<h3>Login Page</h3>
-<p align="center">
-  <img src="<img width="1854" height="825" alt="image" src="https://github.com/user-attachments/assets/823fc459-17ea-4e4d-a914-b51af7f808b1" />" width="900">
-</p>
+### Login Page
 
-<h3>Dashboard</h3>
-<p align="center">
-  <img src="<img width="1910" height="883" alt="image" src="https://github.com/user-attachments/assets/1a109ee3-40bd-4d22-a610-2bd680c15210" />" width="900">
-</p>
+<img width="1854" height="825" alt="Login Page" src="https://github.com/user-attachments/assets/823fc459-17ea-4e4d-a914-b51af7f808b1" />
 
-<h3>AI Assistant</h3>
-<p align="center">
-  <img src="<img width="1911" height="880" alt="image" src="https://github.com/user-attachments/assets/1121e90c-66dd-404f-9690-2c59bd87bd31" />" width="900">
-</p>
+### Dashboard
+
+<img width="1910" height="883" alt="Dashboard" src="https://github.com/user-attachments/assets/1a109ee3-40bd-4d22-a610-2bd680c15210" />
+
+### AI Assistant
+
+<img width="1911" height="880" alt="AI Assistant" src="https://github.com/user-attachments/assets/1121e90c-66dd-404f-9690-2c59bd87bd31" />
 
 ## Author
 Amit
